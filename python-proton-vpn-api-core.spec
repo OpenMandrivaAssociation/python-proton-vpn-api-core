@@ -40,6 +40,9 @@ Requires:   networkmanager-openvpn-gtk
 Requires:   gobject-introspection
 Requires:   lib64networkmanager-gir1.0
 
+Conflicts: python-proton-vpn-network-manager < 0.13.5
+Obsoletes: python-proton-vpn-network-manager
+
 %description
 %{summary}.
 
