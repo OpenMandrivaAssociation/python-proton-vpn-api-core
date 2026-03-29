@@ -1,5 +1,5 @@
 Name:		python-proton-vpn-api-core
-Version:	4.14.3
+Version:	4.17.2
 Release:	1
 Source0:	https://github.com/ProtonVPN/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	Acts as a facade to the other Proton VPN components, exposing a uniform API to the available Proton VPN services.
@@ -47,5 +47,6 @@ Obsoletes: python-proton-vpn-network-manager
 %{summary}.
 
 %files
+%license LICENSE
 %{py_sitedir}/proton/
 %{py_sitedir}/proton_vpn_api_core-*.egg-info
