@@ -1,5 +1,5 @@
 Name:		python-proton-vpn-api-core
-Version:	4.19.1
+Version:	5.0.1
 Release:	1
 Source0:	https://github.com/ProtonVPN/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	Acts as a facade to the other Proton VPN components, exposing a uniform API to the available Proton VPN services.
