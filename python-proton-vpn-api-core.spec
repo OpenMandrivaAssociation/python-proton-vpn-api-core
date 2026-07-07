@@ -1,9 +1,9 @@
 Name:		python-proton-vpn-api-core
-Version:	5.2.4
+Version:	5.2.5
 Release:	1
 URL:		https://github.com/ProtonVPN/python-proton-vpn-api-core
 Source0:	%{url}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Summary:	Acts as a facade to the other Proton VPN components, exposing a uniform API to the available Proton VPN services.
+Summary:	Provides a uniform API to other Proton VPN components
 License:	GPLv3
 Group:		Development/Python
 BuildRequires:	pkgconfig(python)
@@ -16,6 +16,8 @@ BuildRequires:  python%{pyver}dist(fido2)
 BuildRequires:  python%{pyver}dist(packaging)
 BuildRequires:  python%{pyver}dist(proton-vpn-local-agent) >= 1.6.0
 BuildRequires:  python%{pyver}dist(jinja2)
+BuildRequires:  python%{pyver}dist(cryptography)
+BuildRequires:  python%{pyver}dist(pycairo)
 BuildRequires:  python-gobject3
 BuildRequires:  networkmanager
 BuildRequires:  networkmanager-openvpn
@@ -33,6 +35,8 @@ Requires: python%{pyver}dist(fido2)
 Requires:   python%{pyver}dist(packaging)
 Requires:   python%{pyver}dist(proton-vpn-local-agent) >= 1.6.0
 Requires:   python%{pyver}dist(jinja2)
+Requires:   python%{pyver}dist(cryptography)
+Requires:   python%{pyver}dist(pycairo)
 Requires:   python-gobject3
 Requires:   networkmanager
 Requires:   networkmanager-openvpn
