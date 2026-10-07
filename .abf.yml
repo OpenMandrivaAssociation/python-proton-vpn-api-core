@@ -1,2 +1,4 @@
 sources:
-  python-proton-vpn-api-core-5.5.11.tar.gz:  db3013e1a6aab70517d9b6626f0b7e0cb1748506
+    protun-2.2.1.tar.gz:    99ce1e9094fd7cb6d1d57979de1f6bb6b2ab55e6
+    python-proton-vpn-api-core-5.8.7-vendor.tar.xz: 409f01abbfac002d76b380a6fa0d5d54297d439d
+    python-proton-vpn-api-core-5.8.7.tar.gz:    81ff39642ec3de55b5d5085348b6c3889ef8394b
