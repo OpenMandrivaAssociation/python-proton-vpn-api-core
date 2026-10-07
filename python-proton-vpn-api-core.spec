@@ -5,7 +5,7 @@
 
 Name:		python-proton-vpn-api-core
 Version:	5.8.7
-Release:	1
+Release:	2
 Summary:	Provides a uniform API to other Proton VPN components
 License:	GPL-3.0-only
 Group:		Development/Python
@@ -138,7 +138,7 @@ sed -i 's|/usr/libexec/proton-vpn-kill-switch-service|/usr/lib64/proton-vpn-kill
 install -d "%{buildroot}%{_libdir}/NetworkManager/VPN"
 sed -e 's|program=.*|program=/usr/lib64/nm-protun-service|' resources/nm-protun.name > "%{buildroot}%{_libdir}/NetworkManager/VPN/nm-protun.name"
 
-install -Dm755 target/release/libproton_vpn_platform.so %{buildroot}%{_libdir}/proton/vpn/platform.abi3.so
+install -Dm755 target/release/libproton_vpn_platform.so %{buildroot}%{python_sitearch}/proton/vpn/platform.abi3.so
 
 
 %preun
@@ -175,6 +175,5 @@ pkill -f "^/usr/libexec/proton-vpn-kill-switch-service" || true
 %{_datadir}/dbus-1/system.d/nm-protun-service.conf
 %{_libdir}/nm-protun-service
 %{_libdir}/NetworkManager/VPN/nm-protun.name
-%{_libdir}/proton/vpn/platform.abi3.so
 %{python_sitearch}/proton
 %{python_sitearch}/proton_vpn_api_core-%{version}-py%{pyver}.egg-info
