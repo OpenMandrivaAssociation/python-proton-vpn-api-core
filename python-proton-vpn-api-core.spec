@@ -5,7 +5,7 @@
 
 Name:		python-proton-vpn-api-core
 Version:	5.8.7
-Release:	2
+Release:	3
 Summary:	Provides a uniform API to other Proton VPN components
 License:	GPL-3.0-only
 Group:		Development/Python
