@@ -1,0 +1,19 @@
+--- a/src/protun/nm_protun_service/service.rs
++++ b/src/protun/nm_protun_service/service.rs
+@@ -137,10 +137,12 @@
+             Box::new(on_state_changed),
+             Box::new(on_event),
+             Some(Box::new(
+-                move |socket_fd: i32| {
+-                    if let Err(error) = set_fwmark_on_socket(socket_fd, FWMARK) {
+-                        log::error!("Unable to set fwmark on socket {error}");
+-                    }
++                move |socket_fd: i32| match set_fwmark_on_socket(socket_fd, FWMARK) {
++                        Ok(()) => true,
++                        Err(error) => {
++                            log::error!("Unable to set fwmark on socket {error}");
++                            false
++                        }
+                 })),
+             Box::new(StubKeyring{})
+         );

@@ -1,11 +1,11 @@
 %undefine _debugsource_packages
 
 %define name1 protun
-%define version1 2.2.1
+%define version1 3.0.5
 
 Name:		python-proton-vpn-api-core
-Version:	5.8.7
-Release:	3
+Version:	6.1.1
+Release:	2
 Summary:	Provides a uniform API to other Proton VPN components
 License:	GPL-3.0-only
 Group:		Development/Python
@@ -18,13 +18,15 @@ Source2:    %{name}-%{version}-vendor.tar.xz
 #   The api-core archive has an empty directory that links to the protun archive
 #   We build offline, so that is a problem
 #   extract api-core archive, then extract protun archive
-#   copy the contents of protun and paste into python-proton-vpn-api-core-{version}/dependencies/protun
+#   copy the contents of protun and paste into python-proton-vpn-api-core-VERSION/dependencies/protun
 #   now we can do the rust vendoring
 
 #   enter source tree for python-proton-vpn-api-core
 #   cargo vendor -s dependencies/protun/Cargo.toml
 #   tar -cJvf python-proton-vpn-api-core-{version}-vendor.tar.xz vendor
 #   place vendor archive alongside source archive
+
+Patch:	6.1.1-nm_protun_service.rs-fix.patch
 
 BuildRequires:	pkgconfig(python)
 BuildRequires:	python%{pyver}dist(proton-core)
@@ -112,9 +114,10 @@ directory = "vendor"
 EOF
 
 %build
-cargo build --release --frozen \
+cargo build --release --offline \
       --bin nm-protun-service \
       --bin proton-vpn-kill-switch-service \
+      --bin fwks \
       --lib \
       --features 'protun,python,core,local_agent,kill_switch,telemetry'
 
@@ -138,7 +141,10 @@ sed -i 's|/usr/libexec/proton-vpn-kill-switch-service|/usr/lib64/proton-vpn-kill
 install -d "%{buildroot}%{_libdir}/NetworkManager/VPN"
 sed -e 's|program=.*|program=/usr/lib64/nm-protun-service|' resources/nm-protun.name > "%{buildroot}%{_libdir}/NetworkManager/VPN/nm-protun.name"
 
+install -Dm755 target/release/fwks %{buildroot}%{_libdir}/fwks
+
 install -Dm755 target/release/libproton_vpn_platform.so %{buildroot}%{python_sitearch}/proton/vpn/platform.abi3.so
+
 
 
 %preun
@@ -165,6 +171,7 @@ fi
 pkill -f "^/usr/libexec/proton-vpn-kill-switch-service" || true
 
 
+
 %files
 %license LICENSE CODEOWNERS
 %doc README.md
@@ -175,5 +182,6 @@ pkill -f "^/usr/libexec/proton-vpn-kill-switch-service" || true
 %{_datadir}/dbus-1/system.d/nm-protun-service.conf
 %{_libdir}/nm-protun-service
 %{_libdir}/NetworkManager/VPN/nm-protun.name
+%{_libdir}/fwks
 %{python_sitearch}/proton
 %{python_sitearch}/proton_vpn_api_core-%{version}-py%{pyver}.egg-info
